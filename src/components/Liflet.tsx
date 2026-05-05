@@ -1,10 +1,10 @@
 // App.tsx
 import {
   MapContainer,
-  TileLayer,
   useMap,
+  WMSTileLayer,
 } from "react-leaflet";
-import { LatLngBounds } from "leaflet";
+import { CRS, LatLngBounds } from "leaflet";
 import "leaflet/dist/leaflet.css";
 import { useEffect } from "react";
 
@@ -26,11 +26,18 @@ const Liflet: React.FC = () => {
     <div style={{ height: "100vh", width: "100%" }}>
       <MapContainer
         bounds={bounds}
-        scrollWheelZoom={true}
-        markerZoomAnimation={true}
         style={{ height: "100%", width: "100%" }}
+        crs={CRS.EPSG4326}
       >
-        <TileLayer  url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
+        <WMSTileLayer
+        url="https://mosdac.gov.in/mapproxy/service"
+        layers="osm"
+        styles=""
+        format="image/png"
+        version="1.3.0"
+        transparent={true}
+      />
+        {/* <TileLayer  url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" /> */}
         <MapInitializer />
       </MapContainer>
     </div>
